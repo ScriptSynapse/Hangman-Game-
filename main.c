@@ -1,47 +1,78 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdlib.h>//for exit()
-#include <conio.h>
+#include <stdlib.h> // for exit(), malloc, realloc, free
+#include <ctype.h>  // for isalpha(), toupper()
+#include <string.h> // for memcpy, memcmp, memset
+#include <stdint.h>
 
-void clear_screen() {
-    for (int i = 0; i < 50; i++) printf("\n");
-}
+#ifdef _WIN32
+    #include <conio.h>
+    const int  KEY_ENTER = 13;
+    const int  KEY_BACKSPACE = 8;
+    void clear_screen(){system("cls");}
+    int get_char_hidden() {
+        return _getch();
+    }
+#endif
+#ifdef __linux__
+    #include <termios.h>
+    #include <unistd.h>
+    const unsigned char  KEY_ENTER = '\n';
+    const int  KEY_BACKSPACE = 127;
 
+        void clear_screen(){system("clear");}
+
+    int get_char_hidden() {
+        struct termios oldt, newt;
+        int ch;
+        tcgetattr(STDIN_FILENO, &oldt);
+        newt = oldt;
+        newt.c_lflag &= ~(ICANON | ECHO); // &= is like +=
+        // | is for ORing bit flags and ~ as for negating them
+        tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+        ch = getchar();
+        tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+        return ch;
+    }
+#endif
 void get_secret_word(char word[]) {
     int index = 0;
     int ch;
+
     printf("Enter the Secret Word (recommended [6-9] letters) >> ");
 
     for (;;) {
-        ch = _getch();
+        ch = get_char_hidden();
         // Capture input without printing
         //gets the input from the keyboard directly
         //The _getch() function returns an 8-bit value
         //the OS has a predefined number for each input
 
-        if (ch == '0') exit(0);
+        if (ch == EOF) exit(0);
 
-        if (ch == 13) { // Enter key
-            word[index] = '\0';
-            break;
+        if (ch == KEY_ENTER) {
+            if (index > 0) {
+                word[index] = '\0';
+                break;
+            }
         }
-        if (ch == 8) { // Backspace
+        else if (ch == KEY_BACKSPACE ) { // Check both for safety
             if (index > 0) {
                 index--;
                 printf("\b \b");
-            }
-    //\b (first Backspace): Moves the cursor one position to the left. It does not erase anything; it just moves the "pen."
+                    //\b (first Backspace): Moves the cursor one position to the left. It does not erase anything; it just moves the "pen."
     //(Space): Prints a space character over the old letter. This effectively hides the character from the user.
     //\b (second Backspace): Moves the cursor back to the left again. Without this, the cursor would be sitting one space to the right of where it needs to be for the next input.
+
+            }
         }
-        else if (isalpha(ch)) {//make sure that the input is valid
+        else if (isalpha(ch)) {
             word[index] = (char)toupper(ch);//take the input
             index++;
             printf("*");//and mask the input by printing a    *
         }
     }
+    printf("\n"); // Move to next line after word is entered
 }
 
 void draw_hangman(int lives) {
