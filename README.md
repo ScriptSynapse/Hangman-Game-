@@ -1,118 +1,125 @@
-🕹️ **Hangman Game in C (Cross Platform Version)**
+🕹️ ## Hangman Game in C (Cross-Platform)
 
-A console based Hangman game written in C. This version works on both Windows and Linux and demonstrates practical concepts like string handling, input validation, ASCII rendering, and basic terminal control.
+A clean, console-based Hangman game written in C.
+Built for beginners who want hands-on practice with loops, conditionals, arrays, strings, and platform-specific input handling.
 
-The game supports two players:
+Two-player format:
 
-* Player 1 enters a secret word (hidden with `*`)
-* Player 2 guesses letters until they win or run out of lives
+* **Player 1** enters a secret word (hidden with `*`)
+* **Player 2** guesses letters until they win or run out of lives
 
----
-
-📌 **Features**
-
-* Secret word input is hidden (masked with `*`)
-* Works on Windows and Linux
-* Input validation (only alphabet letters allowed)
-* Prevents repeated guesses
-* Tracks and displays guessed letters
-* ASCII Hangman drawing that updates with lives
-* Win and Game Over screens
-* Exit anytime by entering `0`
-* Clears screen between turns for clean gameplay
+Simple. Fun. Great for learning core C concepts.
 
 ---
 
-🛠️ **Technologies Used**
+## 📌 Features
 
-**C Programming Language**
-
-**Standard Libraries:**
-
-* stdio.h
-* string.h
-* ctype.h
-* stdlib.h
-* stdint.h
-
-**Platform Specific Libraries:**
-
-* conio.h (Windows for `_getch()`)
-* termios.h and unistd.h (Linux for hidden input)
+* 🔒 Hidden secret word input (masked with `*`)
+* 🖥️ Works on **Windows and Linux**
+* ✅ Input validation (letters only)
+* ⚠️ Prevents repeated guesses
+* 📋 Tracks and displays guessed letters
+* 🎨 Dynamic ASCII Hangman drawing
+* 🏆 Win screen and 💀 Game Over screen
+* 🚪 Exit anytime by entering `0`
+* 🧹 Clears screen between turns for clean gameplay
 
 ---
 
-▶️ **How the Game Works**
+## 🛠️ Technologies Used
 
-1. Player 1 enters a secret word (recommended 6 to 9 letters).
-2. The word is masked with `*` while typing so it remains hidden.
+### Language
+
+* C Programming Language
+
+### Standard Libraries
+
+* `stdio.h`
+* `string.h`
+* `ctype.h`
+* `stdlib.h`
+* `stdint.h`
+
+### Platform-Specific Libraries
+
+* **Windows:** `conio.h` (for `_getch()`)
+* **Linux:** `termios.h`, `unistd.h` (for hidden input handling)
+
+---
+
+## ▶️ How the Game Works
+
+1. Player 1 enters a secret word (recommended 6–9 letters).
+2. The word is masked while typing so it stays hidden.
 3. Player 2 guesses one letter at a time.
 
-If the guess is correct:
+### If the guess is correct:
 
-* The letter is revealed in the word.
+* The letter appears in the word.
 
-If incorrect:
+### If the guess is wrong:
 
-* A life is lost.
+* One life is lost.
 * The hangman drawing updates.
 
-The game ends when:
+### The game ends when:
 
-* The word is fully guessed (Win)
-* Lives reach 0 (Game Over)
-
----
-
-❤️ **Lives System**
-
-* The player starts with 6 lives.
-* Each wrong guess:
-
-    * Reduces lives by 1
-    * Updates the hangman drawing
-* When lives reach 0, the full hangman is displayed and the game ends.
+* ✅ The word is fully guessed (Win)
+* ❌ Lives reach 0 (Game Over)
 
 ---
 
-📂 **Project Structure**
+## ❤️ Lives System
+
+* The player starts with **6 lives**
+* Each incorrect guess:
+
+  * Reduces lives by 1
+  * Updates the hangman drawing
+* At 0 lives, the full hangman appears and the game ends
+
+---
+
+## 📂 Project Structure
 
 Single file program:
 
-`hangman.c`
+```
+hangman.c
+```
 
-Main functions:
+### Main Functions
 
-* `clear_screen()` → Clears console
-* `get_secret_word()` → Securely captures hidden word
+* `clear_screen()` → Clears the console
+* `get_secret_word()` → Captures hidden input securely
 * `draw_hangman(int lives)` → Displays ASCII hangman
 * `main()` → Controls full game logic
 
 ---
 
-🖥️ **How to Compile and Run**
+## 🖥️ How to Compile and Run
 
-### Using GCC (Windows – MinGW / MSVC)
+### 🔹 Windows (GCC / MinGW / MSVC)
 
 ```bash
 gcc hangman.c -o hangman.exe
 hangman.exe
 ```
 
-### Using GCC (Linux)
+### 🔹 Linux
 
 ```bash
 gcc hangman.c -o hangman
 ./hangman
 ```
 
-No external libraries are required.
+No external libraries required.
 
 ---
 
-🎯 **Learning Concepts Covered**
+## 🎯 Learning Concepts Covered
 
-This project helps you understand:
+This project strengthens your understanding of:
 
 * Character arrays (strings)
 * String functions (`strlen`, `strcmp`, `strchr`)
@@ -121,55 +128,48 @@ This project helps you understand:
 * Switch-case
 * Input validation
 * ASCII art rendering
-* Cross platform terminal handling
+* Cross-platform terminal handling
 * Basic game logic
-* Exit handling with `exit(0)`
+* Exit handling using `exit(0)`
+
+If you're a first-year BTech student, this is a strong portfolio project because it shows real control over strings and OS-level input behavior.
 
 ---
 
-⚠️ **Limitations**
+## ⚠️ Limitations
 
-* Console based UI only
-* No multiplayer over network
-* No file based word storage
+* Console-based UI only
+* No network multiplayer
+* No file-based word storage
 * No graphical interface
 
 ---
 
-🚀 **Future Improvements (Ideas)**
+## 🚀 Future Improvements (Ideas)
 
-* Add difficulty levels
-* Add word categories
+* Difficulty levels
+* Word categories
 * Random word generator
-* Score tracking
+* Score tracking system
 * Replay option
 * Timer mode
 * Colored console output
 * Store words in a file
 
----
 
-📸 **Sample Gameplay (Console View)**
-
-```
-WORD: _ A _ _ _ A N
-LIVES: 4
-GUESSED: A, N, T
-
-Enter a letter to guess (0 to Exit).
-Input guess:
-```
 
 ---
 
-📄 **License**
+## 📄 License
 
-This project is open source and free to use for learning and educational purposes. You may distribute it under the MIT License if desired.
+Open-source and free to use for learning purposes.
+You may distribute it under the MIT License if desired.
 
 ---
 
-👨‍💻 **Author**
+## 👨‍💻 Author
 
-Created as a beginner friendly C programming project. Feel free to fork, improve, and experiment with it.
+Created as a beginner-friendly C programming project.
+Feel free to fork it, improve it, and experiment with new features.
 
-If this helped you, consider giving it a ⭐ on GitHub.
+If you found it useful, consider giving it a ⭐ on GitHub.
