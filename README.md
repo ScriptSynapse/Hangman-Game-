@@ -1,4 +1,4 @@
-🕹️ ## Hangman Game in C (Cross-Platform)
+## 🕹️ Hangman Game in C (Cross-Platform)
 
 A clean, console-based Hangman game written in C.
 Built for beginners who want hands-on practice with loops, conditionals, arrays, strings, and platform-specific input handling.
